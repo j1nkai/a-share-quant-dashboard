@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Share Quant & Sector Rotation Chronicle | Vol. 1</title>
+    <title>The A-Share Quant Chronicle | Issue 1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --paper-bg: #F9F7F1;
-            --paper-surface: #FCFAF5;
-            --ink-black: #1A1917;
-            --ink-muted: #59554D;
-            --ink-light: #8C857B;
-            --border-line: #2C2A29;
-            --border-thin: #E2DDD5;
-            --accent-red: #A62B2B;
-            --accent-green: #2D6A4F;
-            --font-serif-title: 'Cinzel', 'Noto Serif SC', serif;
-            --font-serif-body: 'Playfair Display', 'Noto Serif SC', serif;
+            --paper-bg: #F4F1EA;
+            --paper-sheet: #FAF8F5;
+            --ink-black: #111110;
+            --ink-body: #2B2A28;
+            --ink-muted: #66635D;
+            --ink-light: #99948D;
+            --rule-heavy: #111110;
+            --rule-light: #DCD7CE;
+            --accent-red: #B91C1C;
+            --accent-green: #15803D;
+            --font-title: 'Cinzel', 'Noto Serif SC', serif;
+            --font-body: 'Newsreader', 'Noto Serif SC', serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -31,157 +32,172 @@
 
         body {
             background-color: var(--paper-bg);
-            color: var(--ink-black);
-            font-family: var(--font-serif-body);
-            padding: 40px 20px;
-            line-height: 1.7;
-            background-image: 
-                radial-gradient(#E2DDD5 0.75px, transparent 0.75px),
-                linear-gradient(to bottom, rgba(249,247,241,0.8), rgba(249,247,241,1));
-            background-size: 24px 24px, 100% 100%;
+            color: var(--ink-body);
+            font-family: var(--font-body);
+            padding: 60px 20px;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(#E5E0D6 1px, transparent 1px);
+            background-size: 28px 28px;
         }
 
-        .paper-container {
-            max-width: 960px;
+        /* 优雅单列垂直排版 */
+        .paper-wrapper {
+            max-width: 820px;
             margin: 0 auto;
-            background: var(--paper-surface);
-            border: 1px solid #D8D2C6;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02);
-            padding: 48px 56px;
-            position: relative;
+            background: var(--paper-sheet);
+            padding: 64px 72px;
+            border: 1px solid #E2DDD5;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.02);
         }
 
-        /* 报纸双横线头条标记 */
-        .paper-header {
-            border-bottom: 3px double var(--border-line);
-            padding-bottom: 20px;
-            margin-bottom: 32px;
+        /* 报纸双粗线头条 Header */
+        header {
             text-align: center;
+            border-bottom: 4px double var(--rule-heavy);
+            padding-bottom: 24px;
+            margin-bottom: 40px;
         }
 
-        .masthead-meta {
+        .masthead-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: var(--font-mono);
             font-size: 11px;
             color: var(--ink-muted);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--border-thin);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
+            border-bottom: 1px solid var(--rule-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .masthead-title {
-            font-family: var(--font-serif-title);
-            font-size: 38px;
+            font-family: var(--font-title);
+            font-size: 46px;
             font-weight: 900;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
             color: var(--ink-black);
+            line-height: 1.05;
             text-transform: uppercase;
-            line-height: 1.1;
-            margin: 12px 0 8px 0;
+            margin-bottom: 12px;
         }
 
-        .masthead-subtitle {
-            font-size: 14px;
+        .masthead-tagline {
+            font-size: 15px;
             color: var(--ink-muted);
             font-style: italic;
             letter-spacing: 0.02em;
         }
 
-        /* 摘要四栏栅格 */
-        .summary-columns {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            border-bottom: 1px solid var(--border-line);
-            padding-bottom: 24px;
-            margin-bottom: 32px;
+        /* 社论关键焦点带 (Horizontal Stat Bar) */
+        .stat-bar {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--rule-heavy);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
         }
 
-        .summary-col {
-            border-right: 1px solid var(--border-thin);
-            padding-right: 16px;
+        .stat-item {
+            flex: 1;
+            padding-right: 20px;
+            border-right: 1px solid var(--rule-light);
         }
 
-        .summary-col:last-child {
+        .stat-item:last-child {
             border-right: none;
             padding-right: 0;
+            padding-left: 20px;
         }
 
-        .col-label {
+        .stat-item:not(:first-child) {
+            padding-left: 20px;
+        }
+
+        .stat-label {
             font-family: var(--font-mono);
             font-size: 10px;
             color: var(--ink-light);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
         }
 
-        .col-value {
-            font-family: var(--font-serif-title);
+        .stat-value {
+            font-family: var(--font-title);
             font-size: 22px;
             font-weight: 700;
-            margin-top: 6px;
             color: var(--ink-black);
+            margin-top: 4px;
         }
 
-        /* 社论社评风格区域 */
-        .editorial-section {
-            margin-bottom: 36px;
+        /* 单列文章主体结构 */
+        .article-section {
+            margin-bottom: 48px;
         }
 
-        .section-title {
-            font-family: var(--font-serif-title);
+        .section-header {
+            font-family: var(--font-title);
             font-size: 18px;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            border-bottom: 1px solid var(--border-line);
+            color: var(--ink-black);
+            border-bottom: 1px solid var(--rule-heavy);
             padding-bottom: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             display: flex;
             justify-content: space-between;
             align-items: baseline;
         }
 
-        .article-body {
-            font-size: 15px;
-            color: #2C2926;
-            line-height: 1.8;
+        .editorial-content {
+            font-size: 16px;
+            color: var(--ink-body);
+            line-height: 1.85;
             text-align: justify;
         }
 
-        .article-body p {
-            margin-bottom: 14px;
+        .editorial-content p {
+            margin-bottom: 18px;
             text-indent: 2em;
         }
 
-        .first-letter::first-letter {
-            font-family: var(--font-serif-title);
-            font-size: 42px;
+        .editorial-content p.lead {
+            text-indent: 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink-black);
+        }
+
+        .editorial-content p.lead::first-letter {
+            font-family: var(--font-title);
+            font-size: 52px;
             float: left;
             line-height: 0.8;
-            padding-right: 8px;
+            padding-right: 12px;
             padding-top: 4px;
             font-weight: 900;
             color: var(--ink-black);
         }
 
-        /* 报纸风格表格 */
+        /* 高级纯粹表格 */
+        .data-table-container {
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13.5px;
-            margin-top: 16px;
+            font-size: 14px;
+            margin-top: 8px;
         }
 
         th, td {
-            padding: 10px 12px;
+            padding: 12px 14px;
             text-align: left;
-            border-bottom: 1px solid var(--border-thin);
+            border-bottom: 1px solid var(--rule-light);
         }
 
         th {
@@ -189,22 +205,22 @@
             font-size: 11px;
             color: var(--ink-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 2px solid var(--border-line);
-            background: rgba(0,0,0,0.01);
+            letter-spacing: 0.08em;
+            border-bottom: 2px solid var(--rule-heavy);
+            background: transparent;
         }
 
         td.mono {
             font-family: var(--font-mono);
-            font-size: 13px;
+            font-size: 13.5px;
         }
 
-        .tag-paper {
+        .badge-quant {
             font-family: var(--font-mono);
             font-size: 10px;
-            padding: 2px 6px;
-            border: 1px solid var(--border-line);
-            background: #F2EFE9;
+            padding: 2px 8px;
+            border: 1px solid var(--rule-heavy);
+            background: #F1ECE1;
             color: var(--ink-black);
             letter-spacing: 0.05em;
         }
@@ -212,92 +228,95 @@
         .text-red { color: var(--accent-red); font-weight: 600; }
         .text-green { color: var(--accent-green); font-weight: 600; }
 
-        /* 报纸底栏页脚 */
-        .paper-footer {
-            border-top: 3px double var(--border-line);
-            padding-top: 20px;
-            margin-top: 40px;
+        /* 报纸底栏 */
+        footer {
+            border-top: 3px double var(--rule-heavy);
+            padding-top: 24px;
+            margin-top: 56px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: var(--font-mono);
             font-size: 11px;
             color: var(--ink-light);
+            letter-spacing: 0.05em;
         }
     </style>
 </head>
 <body>
-    <div class="paper-container">
-        <header class="paper-header">
-            <div class="masthead-meta">
+    <div class="paper-wrapper">
+        <header>
+            <div class="masthead-info">
                 <span>ESTABLISHED 2026</span>
-                <span>VOL. 1 / 15 DAYS CHRONICLE</span>
+                <span>VOL. 1 / 15 DAYS RESEARCH</span>
                 <span>2026-08-05 EDITION</span>
             </div>
-            <h1 class="masthead-title">The A-Share Quant Chronicle</h1>
-            <p class="masthead-subtitle">A Daily Editorial on Sector Rotations, Capital Flows, and Algorithmic Market Footprints</p>
+            <h1 class="masthead-title">The Quant Chronicle</h1>
+            <p class="masthead-tagline">A Daily Editorial on A-Share Sector Rotations, Liquidity Flows, and Algorithmic Patterns</p>
         </header>
 
-        <div class="summary-columns">
-            <div class="summary-col">
-                <div class="col-label">Observational Day</div>
-                <div class="col-value">DAY 1 <span style="font-size: 13px; color: var(--ink-light); font-weight: normal;">/ 15</span></div>
+        <div class="stat-bar">
+            <div class="stat-item">
+                <div class="stat-label">Observation Day</div>
+                <div class="stat-value">DAY 1 <span style="font-size: 13px; color: var(--ink-light); font-weight: normal;">/ 15</span></div>
             </div>
-            <div class="summary-col">
-                <div class="col-label">Dominant Sector</div>
-                <div class="col-value" style="font-size: 18px;">Semiconductors</div>
+            <div class="stat-item">
+                <div class="stat-label">Dominant Vector</div>
+                <div class="stat-value" style="font-size: 18px;">Semiconductors</div>
             </div>
-            <div class="summary-col">
-                <div class="col-label">Quant Footprint</div>
-                <div class="col-value text-red" style="font-size: 18px;">High Activity</div>
+            <div class="stat-item">
+                <div class="stat-label">Quant Intensity</div>
+                <div class="stat-value text-red" style="font-size: 18px;">High Activity</div>
             </div>
-            <div class="summary-col">
-                <div class="col-label">Capital Balance</div>
-                <div class="col-value" style="font-size: 18px;">Tight Liquidity</div>
+            <div class="stat-item">
+                <div class="stat-label">Liquidity Mode</div>
+                <div class="stat-value" style="font-size: 18px;">Tight Rotation</div>
             </div>
         </div>
 
-        <div class="editorial-section">
-            <div class="section-title">
-                <span>I. Editorial & Market Anatomy</span>
+        <div class="article-section">
+            <div class="section-header">
+                <span>I. Market Anatomy & Algorithmic Footprints</span>
                 <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-light);">ANALYSIS BY REM</span>
             </div>
-            <div class="article-body">
-                <p class="first-letter">当下 A 股市场的核心运行逻辑可归结为<strong>高频量化模型主导下的存量博弈与极速轮动</strong>。场外增量资金持续观望，导致市场缺乏支撑大盘单边上行的流动性总量。场内资金只能在科技主线（半导体/AI）与防御红利之间进行极其高频的腾挪与快速套利。</p>
+            <div class="editorial-content">
+                <p class="lead">当前 A 股市场的核心运行逻辑可归结为<strong>高频量化模型主导下的存量博弈与极速轮动</strong>。场外增量资金持续观望，导致市场缺乏支撑大盘单边上行的流动性总量。场内资金只能在科技主线（半导体/AI）与防御红利之间进行极其高频的腾挪与套利。</p>
                 <p>从微观交易特征来看，算法交易（尤其是量化多头与网格做 T 策略）留下了极其清晰的特征痕迹：板块换手率频繁突破 15%，但股价中枢并未产生趋势性突破，分时图呈现规则的短期锯齿状洗盘震荡；同时，集合竞价与尾盘 15 分钟的撤挂单频率显著放大，这表明算法策略正在集中进行因子权重再平衡。</p>
             </div>
         </div>
 
-        <div class="editorial-section">
-            <div class="section-title">
-                <span>II. Sector Rotations & Algorithmic Signals</span>
-                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-light);">TOP OBSERVED BOARDS</span>
+        <div class="article-section">
+            <div class="section-header">
+                <span>II. Sector Rotations & Quant Activity</span>
+                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-light);">OBSERVED BOARDS</span>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Sector Name</th>
-                        <th>Change (%)</th>
-                        <th>Turnover Rate</th>
-                        <th>Leading Stock</th>
-                        <th>Quant Tag</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="data-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sector Name</th>
+                            <th>Change (%)</th>
+                            <th>Turnover</th>
+                            <th>Leading Stock</th>
+                            <th>Quant Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <tr>
-                        <td colspan="5" style="text-align:center; color: var(--ink-light); padding: 24px; font-style: italic;">
-                            Market closed or pending post-market data sync. Analytical framework active.
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="5" style="text-align:center; color: var(--ink-light); padding: 28px; font-style: italic;">
+                                Post-market data sync in progress. Analytical framework active for Day {days_tracked}.
+                            </td>
+                        </tr>
         
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <footer class="paper-footer">
+        <footer>
             <span>PREPARED EXCLUSIVELY FOR MASTER JK</span>
-            <span>OPENCLAW QUANT CHRONICLE ENGINE</span>
+            <span>OPENCLAW QUANT RESEARCH CHRONICLE</span>
             <span>PAGE 1 OF 1</span>
         </footer>
     </div>
