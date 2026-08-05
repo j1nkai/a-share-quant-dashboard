@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Share Quant & Sector Rotation Dashboard | Day 1</title>
+    <title>A-Share Quant & Sector Rotation Chronicle | Vol. 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #FAFAFA;
-            --surface: #FFFFFF;
-            --border: #E5E7EB;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --accent-red: #DC2626;
-            --accent-green: #16A34A;
-            --accent-blue: #2563EB;
-            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
-            --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            --paper-bg: #F9F7F1;
+            --paper-surface: #FCFAF5;
+            --ink-black: #1A1917;
+            --ink-muted: #59554D;
+            --ink-light: #8C857B;
+            --border-line: #2C2A29;
+            --border-thin: #E2DDD5;
+            --accent-red: #A62B2B;
+            --accent-green: #2D6A4F;
+            --font-serif-title: 'Cinzel', 'Noto Serif SC', serif;
+            --font-serif-body: 'Playfair Display', 'Noto Serif SC', serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
@@ -25,223 +30,264 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: var(--font-sans);
+            background-color: var(--paper-bg);
+            color: var(--ink-black);
+            font-family: var(--font-serif-body);
             padding: 40px 20px;
-            line-height: 1.6;
-            background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
-            background-size: 20px 20px;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(#E2DDD5 0.75px, transparent 0.75px),
+                linear-gradient(to bottom, rgba(249,247,241,0.8), rgba(249,247,241,1));
+            background-size: 24px 24px, 100% 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1000px;
+        .paper-container {
+            max-width: 960px;
             margin: 0 auto;
+            background: var(--paper-surface);
+            border: 1px solid #D8D2C6;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02);
+            padding: 48px 56px;
+            position: relative;
         }
 
-        header {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        /* 报纸双横线头条标记 */
+        .paper-header {
+            border-bottom: 3px double var(--border-line);
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .masthead-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .title-group h1 {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .title-group p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .badge {
             font-family: var(--font-mono);
             font-size: 11px;
-            padding: 4px 10px;
-            background: #F3F4F6;
-            border: 1px solid #E5E7EB;
-            border-radius: 4px;
-            color: #374151;
+            color: var(--ink-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-thin);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
         }
 
-        .grid-summary {
+        .masthead-title {
+            font-family: var(--font-serif-title);
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -0.01em;
+            color: var(--ink-black);
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin: 12px 0 8px 0;
+        }
+
+        .masthead-subtitle {
+            font-size: 14px;
+            color: var(--ink-muted);
+            font-style: italic;
+            letter-spacing: 0.02em;
+        }
+
+        /* 摘要四栏栅格 */
+        .summary-columns {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 20px;
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
         }
 
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        .summary-col {
+            border-right: 1px solid var(--border-thin);
+            padding-right: 16px;
         }
 
-        .card-label {
-            font-size: 12px;
-            color: var(--text-muted);
+        .summary-col:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .col-label {
             font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-light);
             text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
-        .card-value {
-            font-size: 24px;
+        .col-value {
+            font-family: var(--font-serif-title);
+            font-size: 22px;
             font-weight: 700;
-            margin-top: 8px;
-            font-family: var(--font-mono);
+            margin-top: 6px;
+            color: var(--ink-black);
         }
 
-        .section-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        /* 社论社评风格区域 */
+        .editorial-section {
+            margin-bottom: 36px;
         }
 
-        .section-card h2 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
+        .section-title {
+            font-family: var(--font-serif-title);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-line);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
+            justify-content: space-between;
+            align-items: baseline;
         }
 
-        .analysis-text {
-            font-size: 14px;
-            color: #374151;
+        .article-body {
+            font-size: 15px;
+            color: #2C2926;
             line-height: 1.8;
-            margin-bottom: 16px;
+            text-align: justify;
         }
 
-        .analysis-text strong {
-            color: #111827;
+        .article-body p {
+            margin-bottom: 14px;
+            text-indent: 2em;
         }
 
+        .first-letter::first-letter {
+            font-family: var(--font-serif-title);
+            font-size: 42px;
+            float: left;
+            line-height: 0.8;
+            padding-right: 8px;
+            padding-top: 4px;
+            font-weight: 900;
+            color: var(--ink-black);
+        }
+
+        /* 报纸风格表格 */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 13.5px;
             margin-top: 16px;
         }
 
         th, td {
-            padding: 12px 16px;
+            padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-thin);
         }
 
         th {
             font-family: var(--font-mono);
-            color: var(--text-muted);
-            font-weight: 500;
-            background: #FAFAFA;
+            font-size: 11px;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border-line);
+            background: rgba(0,0,0,0.01);
         }
 
         td.mono {
             font-family: var(--font-mono);
+            font-size: 13px;
         }
 
-        .tag-quant {
-            display: inline-block;
-            padding: 2px 8px;
-            font-size: 11px;
+        .tag-paper {
             font-family: var(--font-mono);
-            border-radius: 4px;
-            background: #EFF6FF;
-            color: #1D4ED8;
-            border: 1px solid #BFDBFE;
+            font-size: 10px;
+            padding: 2px 6px;
+            border: 1px solid var(--border-line);
+            background: #F2EFE9;
+            color: var(--ink-black);
+            letter-spacing: 0.05em;
         }
 
-        .text-red { color: var(--accent-red); }
-        .text-green { color: var(--accent-green); }
+        .text-red { color: var(--accent-red); font-weight: 600; }
+        .text-green { color: var(--accent-green); font-weight: 600; }
 
-        footer {
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
+        /* 报纸底栏页脚 */
+        .paper-footer {
+            border-top: 3px double var(--border-line);
+            padding-top: 20px;
             margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-light);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="title-group">
-                <h1>⚡ A-Share Quant & Sector Rotation <span class="badge">Day 1 / 15</span></h1>
-                <p>A股板块轮动规律、资金流向及量化高频痕迹每日追踪 | 2026-08-05</p>
+    <div class="paper-container">
+        <header class="paper-header">
+            <div class="masthead-meta">
+                <span>ESTABLISHED 2026</span>
+                <span>VOL. 1 / 15 DAYS CHRONICLE</span>
+                <span>2026-08-05 EDITION</span>
             </div>
-            <div class="badge">Master JK Exclusive Report</div>
+            <h1 class="masthead-title">The A-Share Quant Chronicle</h1>
+            <p class="masthead-subtitle">A Daily Editorial on Sector Rotations, Capital Flows, and Algorithmic Market Footprints</p>
         </header>
 
-        <div class="grid-summary">
-            <div class="card">
-                <div class="card-label">已观测天数</div>
-                <div class="card-value">1 <span style="font-size: 14px; font-weight: normal; color: var(--text-muted)">/ 15 天</span></div>
+        <div class="summary-columns">
+            <div class="summary-col">
+                <div class="col-label">Observational Day</div>
+                <div class="col-value">DAY 1 <span style="font-size: 13px; color: var(--ink-light); font-weight: normal;">/ 15</span></div>
             </div>
-            <div class="card">
-                <div class="card-label">当前轮动主线</div>
-                <div class="card-value" style="font-size: 18px; color: var(--accent-blue)">半导体 / 机器人</div>
+            <div class="summary-col">
+                <div class="col-label">Dominant Sector</div>
+                <div class="col-value" style="font-size: 18px;">Semiconductors</div>
             </div>
-            <div class="card">
-                <div class="card-label">量化交易活跃度</div>
-                <div class="card-value text-red">高 (High)</div>
+            <div class="summary-col">
+                <div class="col-label">Quant Footprint</div>
+                <div class="col-value text-red" style="font-size: 18px;">High Activity</div>
             </div>
-            <div class="card">
-                <div class="card-label">主力资金博弈状态</div>
-                <div class="card-value" style="font-size: 18px;">存量博弈拉锯</div>
-            </div>
-        </div>
-
-        <div class="section-card">
-            <h2>🧠 15天专题：目前 A 股到底在干嘛？（数据归因与现象拆解）</h2>
-            <div class="analysis-text">
-                <p><strong>1. 资金行为特征：</strong>当前市场整体呈现典型的<strong>高频量化网格与游资短线博弈</strong>形态。场外增量资金观望情绪浓厚，场内存量资金在科技（AI/半导体）与避险/红利板块之间进行高频快速轮动。</p>
-                <p><strong>2. 板块轮动周期：</strong>板块轮动周期已被高频算法压缩至 <strong>1 ~ 2 天</strong>，“一日游”现象极为普遍。追高买入的胜率显著降低，而低吸等待轮动符合量化算法的统计套利模型。</p>
-                <p><strong>3. 量化高频操作痕迹判定：</strong></p>
-                <ul>
-                    <li><strong>特征一（高换手与高振幅）：</strong>换手率 > 15% 但股价无明显单边趋势，分时图呈现极规则的短周期锯齿状震荡（算法网格做 T）。</li>
-                    <li><strong>特征二（尾盘/集合竞价挂撤单）：</strong>开盘集合竞价与收盘前 15 分钟，委买/委卖挂单量发生高频剧烈变动，极可能是 DMA 或量化多头策略在调整因子权重。</li>
-                </ul>
+            <div class="summary-col">
+                <div class="col-label">Capital Balance</div>
+                <div class="col-value" style="font-size: 18px;">Tight Liquidity</div>
             </div>
         </div>
 
-        <div class="section-card">
-            <h2>📈 板块量化痕迹与资金流向监测 (Today's Top Observed)</h2>
+        <div class="editorial-section">
+            <div class="section-title">
+                <span>I. Editorial & Market Anatomy</span>
+                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-light);">ANALYSIS BY REM</span>
+            </div>
+            <div class="article-body">
+                <p class="first-letter">当下 A 股市场的核心运行逻辑可归结为<strong>高频量化模型主导下的存量博弈与极速轮动</strong>。场外增量资金持续观望，导致市场缺乏支撑大盘单边上行的流动性总量。场内资金只能在科技主线（半导体/AI）与防御红利之间进行极其高频的腾挪与快速套利。</p>
+                <p>从微观交易特征来看，算法交易（尤其是量化多头与网格做 T 策略）留下了极其清晰的特征痕迹：板块换手率频繁突破 15%，但股价中枢并未产生趋势性突破，分时图呈现规则的短期锯齿状洗盘震荡；同时，集合竞价与尾盘 15 分钟的撤挂单频率显著放大，这表明算法策略正在集中进行因子权重再平衡。</p>
+            </div>
+        </div>
+
+        <div class="editorial-section">
+            <div class="section-title">
+                <span>II. Sector Rotations & Algorithmic Signals</span>
+                <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-light);">TOP OBSERVED BOARDS</span>
+            </div>
             <table>
                 <thead>
                     <tr>
-                        <th>板块名称</th>
-                        <th>今日涨跌幅</th>
-                        <th>换手率</th>
-                        <th>领涨龙头</th>
-                        <th>量化特征标签</th>
+                        <th>Sector Name</th>
+                        <th>Change (%)</th>
+                        <th>Turnover Rate</th>
+                        <th>Leading Stock</th>
+                        <th>Quant Tag</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <tr>
-                        <td colspan="5" style="text-align:center; color: var(--text-muted); padding: 24px;">
-                            (今日休盘或数据采集重试中，已有累积分析框架保持正常更新)
+                        <td colspan="5" style="text-align:center; color: var(--ink-light); padding: 24px; font-style: italic;">
+                            Market closed or pending post-market data sync. Analytical framework active.
                         </td>
                     </tr>
         
@@ -249,8 +295,10 @@
             </table>
         </div>
 
-        <footer>
-            Generated automatically by Rem 💙 for Master JK | OpenClaw Quant Engine 2026
+        <footer class="paper-footer">
+            <span>PREPARED EXCLUSIVELY FOR MASTER JK</span>
+            <span>OPENCLAW QUANT CHRONICLE ENGINE</span>
+            <span>PAGE 1 OF 1</span>
         </footer>
     </div>
 </body>
