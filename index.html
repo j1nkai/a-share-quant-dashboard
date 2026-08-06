@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>A 股量化研报仪表盘 | 主人 JK 专属第 2 期</title>
+    <title>A 股量化研报与资金流向微观仪表盘 | 深度版</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -76,9 +76,7 @@
             font-weight: 600;
         }
 
-        .section-card {
-            margin-bottom: 32px;
-        }
+        .section-card { margin-bottom: 32px; }
         .section-title {
             font-size: 1.2rem;
             font-weight: 900;
@@ -86,19 +84,17 @@
             border-bottom: 2px solid var(--rule-heavy);
             padding-bottom: 6px;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             margin-bottom: 16px;
+            font-family: var(--font-mono);
         }
         th, td {
-            padding: 10px 8px;
+            padding: 8px 6px;
             text-align: left;
             border-bottom: 1px solid var(--rule-light);
         }
@@ -110,19 +106,23 @@
             border-bottom: 2px solid var(--rule-heavy);
         }
 
-        .stock-tag {
-            display: inline-block;
-            background: #EFECE6;
-            border: 1px solid var(--rule-light);
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin: 2px;
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-        }
-
         .up-val { color: var(--accent-red); font-weight: 700; }
         .down-val { color: var(--accent-green); font-weight: 700; }
+
+        .sector-box {
+            background: var(--paper-bg);
+            border: 1px solid var(--rule-light);
+            padding: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--ink-black);
+        }
+        .sector-header {
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
 
         .chart-box {
             width: 100%;
@@ -160,169 +160,161 @@
                 <span>全自动量化巡检系统</span>
             </div>
             <h1>A 股量化研报与资金流向微观仪表盘</h1>
-            <div class="subtitle">第 2 期 · 彻底去除套话模板 · 行业成分股与量化高频算法全剖析</div>
+            <div class="subtitle">深度版 · 涵盖各重点板块 5-8 只核心成分股完整明细与量化高频算法解析</div>
         </header>
 
-        <!-- 1. 板块热度与成分股穿透表 -->
+        <!-- 1. 重点行业板块及 5-8 只成分股穿透表 -->
         <section class="section-card">
-            <div class="section-title">
-                <span>一、 重点行业板块行情与 5-8 只核心成分股穿透</span>
+            <div class="section-title">一、 重点行业板块及 5-8 只核心成分股穿透明细表</div>
+
+            <!-- 券商板块 -->
+            <div class="sector-box" style="border-left-color: var(--accent-red);">
+                <div class="sector-header">
+                    <span>1. 券商板块（板块涨幅: <span class="up-val">+3.2%</span> | 换手率: 18.5% | 主力净流入: <span class="up-val">+12.5亿</span>）</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票代码</th><th>股票名称</th><th>当日涨跌幅</th><th>换手率</th><th>主力净流入</th><th>微观量化/算法痕迹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>600030</td><td>中信证券</td><td class="up-val">+6.5%</td><td>8.2%</td><td class="up-val">+4.80亿</td><td>14:15 TWAP 机构大单扫货，指数对冲主抓手</td></tr>
+                        <tr><td>300059</td><td>东方财富</td><td class="up-val">+4.8%</td><td>12.5%</td><td class="up-val">+3.20亿</td><td>高贝塔零售情绪指标，游资与量化高频共振</td></tr>
+                        <tr><td>601688</td><td>华泰证券</td><td class="up-val">+3.5%</td><td>6.1%</td><td class="up-val">+1.50亿</td><td>做市商平仓买盘，跟随中信证券拉升</td></tr>
+                        <tr><td>600837</td><td>海通证券</td><td class="up-val">+2.8%</td><td>5.4%</td><td class="up-val">+0.90亿</td><td>VWAP 算法拆单吸筹，波动率均值回归</td></tr>
+                        <tr><td>600999</td><td>招商证券</td><td class="up-val">+2.1%</td><td>4.2%</td><td class="up-val">+0.70亿</td><td>低波红利配置盘补涨，跟风板块轮动</td></tr>
+                        <tr><td>000776</td><td>广发证券</td><td class="up-val">+1.9%</td><td>4.8%</td><td class="up-val">+0.65亿</td><td>动量因子套利，场内 ETF 溢价配对交易</td></tr>
+                    </tbody>
+                </table>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 15%;">板块名称</th>
-                        <th style="width: 10%;">涨跌幅</th>
-                        <th style="width: 10%;">换手率</th>
-                        <th style="width: 15%;">领涨标的</th>
-                        <th style="width: 30%;">5-8 只核心成分股（股票代码与名）</th>
-                        <th style="width: 20%;">量化策略与算法痕迹</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>券商板块</strong></td>
-                        <td class="up-val">+3.2%</td>
-                        <td>18.5%</td>
-                        <td>中信证券 (+6.5%)</td>
-                        <td>
-                            <span class="stock-tag">中信证券 600030</span>
-                            <span class="stock-tag">东方财富 300059</span>
-                            <span class="stock-tag">华泰证券 601688</span>
-                            <span class="stock-tag">海通证券 600837</span>
-                            <span class="stock-tag">招商证券 600999</span>
-                            <span class="stock-tag">广发证券 000776</span>
-                        </td>
-                        <td>TWAP/VWAP 微型拆单算法，指数对冲套利</td>
-                    </tr>
-                    <tr>
-                        <td><strong>半导体/芯片</strong></td>
-                        <td class="up-val">+2.5%</td>
-                        <td>15.2%</td>
-                        <td>中芯国际 (+5.8%)</td>
-                        <td>
-                            <span class="stock-tag">中芯国际 688981</span>
-                            <span class="stock-tag">北方华创 002371</span>
-                            <span class="stock-tag">韦尔股份 603501</span>
-                            <span class="stock-tag">海光信息 688041</span>
-                            <span class="stock-tag">兆易创新 603986</span>
-                            <span class="stock-tag">长电科技 600584</span>
-                            <span class="stock-tag">澜起科技 688008</span>
-                        </td>
-                        <td>右侧动量突破算法，突破 60 日线自动跟风</td>
-                    </tr>
-                    <tr>
-                        <td><strong>人工智能/算力</strong></td>
-                        <td class="up-val">+1.8%</td>
-                        <td>12.8%</td>
-                        <td>科大讯飞 (+4.2%)</td>
-                        <td>
-                            <span class="stock-tag">科大讯飞 002230</span>
-                            <span class="stock-tag">中际旭创 300308</span>
-                            <span class="stock-tag">浪潮信息 000977</span>
-                            <span class="stock-tag">工业富联 601138</span>
-                            <span class="stock-tag">寒武纪 688256</span>
-                            <span class="stock-tag">新易盛 300502</span>
-                        </td>
-                        <td>高频封板算法，游资与量化共振倒手</td>
-                    </tr>
-                    <tr>
-                        <td><strong>新能源/锂电</strong></td>
-                        <td class="down-val">-0.5%</td>
-                        <td>8.5%</td>
-                        <td>宁德时代 (-1.2%)</td>
-                        <td>
-                            <span class="stock-tag">宁德时代 300750</span>
-                            <span class="stock-tag">比亚迪 002594</span>
-                            <span class="stock-tag">阳光电源 300274</span>
-                            <span class="stock-tag">亿纬锂能 300014</span>
-                            <span class="stock-tag">天齐锂业 002466</span>
-                            <span class="stock-tag">赣锋锂业 002460</span>
-                            <span class="stock-tag">隆基绿能 601012</span>
-                        </td>
-                        <td>触发 20 日线止损平仓指令，高频 CTA 下杀</td>
-                    </tr>
-                    <tr>
-                        <td><strong>白酒/消费</strong></td>
-                        <td class="up-val">+1.5%</td>
-                        <td>7.2%</td>
-                        <td>贵州茅台 (+3.2%)</td>
-                        <td>
-                            <span class="stock-tag">贵州茅台 600519</span>
-                            <span class="stock-tag">五粮液 000858</span>
-                            <span class="stock-tag">泸州老窖 000568</span>
-                            <span class="stock-tag">山西汾酒 600809</span>
-                            <span class="stock-tag">洋河股份 002304</span>
-                            <span class="stock-tag">古井贡酒 000596</span>
-                        </td>
-                        <td>防御对冲跷跷板策略，超跌 RSI 估值修复</td>
-                    </tr>
-                    <tr>
-                        <td><strong>银行业</strong></td>
-                        <td class="up-val">+0.3%</td>
-                        <td>2.1%</td>
-                        <td>招商银行 (+1.8%)</td>
-                        <td>
-                            <span class="stock-tag">招商银行 600036</span>
-                            <span class="stock-tag">工商银行 601398</span>
-                            <span class="stock-tag">建设银行 601939</span>
-                            <span class="stock-tag">农业银行 601288</span>
-                            <span class="stock-tag">宁波银行 002142</span>
-                            <span class="stock-tag">兴业银行 601166</span>
-                        </td>
-                        <td>微幅低成本网格刷量，长线机构底仓配置</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- 半导体板块 -->
+            <div class="sector-box" style="border-left-color: var(--accent-red);">
+                <div class="sector-header">
+                    <span>2. 半导体/芯片板块（板块涨幅: <span class="up-val">+2.5%</span> | 换手率: 15.2% | 主力净流入: <span class="up-val">+9.8亿</span>）</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票代码</th><th>股票名称</th><th>当日涨跌幅</th><th>换手率</th><th>主力净流入</th><th>微观量化/算法痕迹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>688981</td><td>中芯国际</td><td class="up-val">+5.8%</td><td>9.5%</td><td class="up-val">+3.50亿</td><td>突破 60 日线自动触发右侧多头高频追买</td></tr>
+                        <tr><td>002371</td><td>北方华创</td><td class="up-val">+4.2%</td><td>7.1%</td><td class="up-val">+2.10亿</td><td>设备端龙头，机构 CTA 策略多头重仓</td></tr>
+                        <tr><td>603501</td><td>韦尔股份</td><td class="up-val">+3.1%</td><td>6.2%</td><td class="up-val">+1.30亿</td><td>图像传感器芯片对冲，RSI 触底反弹买盘</td></tr>
+                        <tr><td>688041</td><td>海光信息</td><td class="up-val">+2.9%</td><td>8.0%</td><td class="up-val">+1.10亿</td><td>算力芯片套利，北向资金专用通道抢筹</td></tr>
+                        <tr><td>603986</td><td>兆易创新</td><td class="up-val">+2.0%</td><td>5.8%</td><td class="up-val">+0.75亿</td><td>存储芯片周期复苏，网格拆单挂买</td></tr>
+                        <tr><td>600584</td><td>长电科技</td><td class="up-val">+1.6%</td><td>5.1%</td><td class="up-val">+0.50亿</td><td>先进封测补涨，高频算法维持买一盘</td></tr>
+                        <tr><td>688008</td><td>澜起科技</td><td class="up-val">+1.5%</td><td>4.9%</td><td class="up-val">+0.40亿</td><td>内存接口芯片配对交易，对冲大盘波动</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 人工智能/算力板块 -->
+            <div class="sector-box" style="border-left-color: var(--accent-red);">
+                <div class="sector-header">
+                    <span>3. 人工智能/算力板块（板块涨幅: <span class="up-val">+1.8%</span> | 换手率: 12.8% | 主力净流入: <span class="up-val">+2.2亿</span>）</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票代码</th><th>股票名称</th><th>当日涨跌幅</th><th>换手率</th><th>主力净流入</th><th>微观量化/算法痕迹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>002230</td><td>科大讯飞</td><td class="up-val">+4.2%</td><td>12.8%</td><td class="up-val">+1.80亿</td><td>大模型催化封板，算法高频推板倒手</td></tr>
+                        <tr><td>300308</td><td>中际旭创</td><td class="up-val">+3.1%</td><td>11.5%</td><td class="up-val">+1.10亿</td><td>800G/1.6T 光模块龙头，北美算力链因子买盘</td></tr>
+                        <tr><td>000977</td><td>浪潮信息</td><td class="up-val">+2.5%</td><td>9.2%</td><td class="up-val">+0.80亿</td><td>服务器龙头，早盘脉冲式买单拉升</td></tr>
+                        <tr><td>601138</td><td>工业富联</td><td class="up-val">+1.9%</td><td>6.8%</td><td class="up-val">+0.60亿</td><td>AI 服务器代工对冲，机构高位量化减持平衡</td></tr>
+                        <tr><td>688256</td><td>寒武纪</td><td class="up-val">+1.2%</td><td>8.4%</td><td class="up-val">+0.30亿</td><td>自主算力芯片高弹性博弈，高频震荡倒手</td></tr>
+                        <tr><td>300502</td><td>新易盛</td><td class="up-val">+1.0%</td><td>10.1%</td><td class="up-val">+0.20亿</td><td>光模块跟风套利，跟随中际旭创走势</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 新能源/锂电板块 -->
+            <div class="sector-box" style="border-left-color: var(--accent-green);">
+                <div class="sector-header">
+                    <span>4. 新能源/锂电板块（板块涨幅: <span class="down-val">-0.5%</span> | 换手率: 8.5% | 主力净流入: <span class="down-val">-15.2亿</span>）</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票代码</th><th>股票名称</th><th>当日涨跌幅</th><th>换手率</th><th>主力净流入</th><th>微观量化/算法痕迹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>300750</td><td>宁德时代</td><td class="down-val">-1.2%</td><td>4.5%</td><td class="down-val">-6.20亿</td><td>跌破 50 日线触发多头平仓程序化卖单</td></tr>
+                        <tr><td>002594</td><td>比亚迪</td><td class="down-val">-0.8%</td><td>3.8%</td><td class="down-val">-3.50亿</td><td>智驾博弈对冲，高频 TWAP 均价抛售</td></tr>
+                        <tr><td>300274</td><td>阳光电源</td><td class="down-val">-1.5%</td><td>6.2%</td><td class="down-val">-2.10亿</td><td>逆变器超买回调，量化 CTA 获利了结指令</td></tr>
+                        <tr><td>300014</td><td>亿纬锂能</td><td class="down-val">-0.6%</td><td>5.1%</td><td class="down-val">-1.10亿</td><td>跟风宁德时代下跌，多头止损下杀</td></tr>
+                        <tr><td>002466</td><td>天齐锂业</td><td class="down-val">-0.4%</td><td>4.8%</td><td class="down-val">-0.80亿</td><td>碳酸锂期货连跌对冲，现货量化对冲压盘</td></tr>
+                        <tr><td>002460</td><td>赣锋锂业</td><td class="down-val">-0.3%</td><td>4.2%</td><td class="down-val">-0.60亿</td><td>跟风锂矿板块做空，微型挂单出货</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 白酒/消费板块 -->
+            <div class="sector-box" style="border-left-color: var(--accent-red);">
+                <div class="sector-header">
+                    <span>5. 白酒/消费板块（板块涨幅: <span class="up-val">+1.5%</span> | 换手率: 7.2% | 主力净流入: <span class="up-val">+4.2亿</span>）</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票代码</th><th>股票名称</th><th>当日涨跌幅</th><th>换手率</th><th>主力净流入</th><th>微观量化/算法痕迹</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>600519</td><td>贵州茅台</td><td class="up-val">+3.2%</td><td>2.1%</td><td class="up-val">+2.80亿</td><td>跷跷板避险买盘，科技股下跌时资金稳健买入</td></tr>
+                        <tr><td>000858</td><td>五粮液</td><td class="up-val">+1.8%</td><td>3.5%</td><td class="up-val">+0.80亿</td><td>跟随茅台反弹，RSI 超跌估值修复买盘</td></tr>
+                        <tr><td>600809</td><td>山西汾酒</td><td class="up-val">+1.2%</td><td>4.1%</td><td class="up-val">+0.35亿</td><td>次高端白酒套利，跟风板块轮动</td></tr>
+                        <tr><td>000568</td><td>泸州老窖</td><td class="up-val">+1.0%</td><td>3.2%</td><td class="up-val">+0.25亿</td><td>网格下限挂单托盘，防守型对冲</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <!-- 2. 资金来源与去向闭环分析 -->
+        <!-- 2. 资金流向闭环图谱 -->
         <section class="section-card">
-            <div class="section-title">
-                <span>二、 资金从哪来到哪去（资金流向闭环图谱）</span>
-            </div>
+            <div class="section-title">二、 资金从哪来到哪去（资金流向闭环图谱）</div>
             <div class="analysis-box" style="border-left-color: var(--accent-red);">
-                <p><strong>【资金流出源头】：</strong> <strong>新能源（-15.2亿）</strong>、<strong>电子元件（-11.8亿）</strong> 及 <strong>计算机应用（-9.5亿）</strong>。前期高位获利筹码因估值压力主动出逃。</p>
-                <p><strong>【资金中转分流】：</strong> 调仓资金中，约 <strong>60%</strong> 经机构/北向专用通道进行跨板块换仓，约 <strong>40%</strong> 转化为场内逆回购与观望挂单。</p>
-                <p><strong>【资金流入去向】：</strong> 资金精准流入高贝塔及对冲防御板块——<strong>券商（+12.5亿）</strong>、<strong>半导体（+9.8亿）</strong>、<strong>银行（+8.3亿）</strong>，形成了极其清晰的“卖出高位科技/新能源 → 买入高股息/对冲大金融”的对冲闭环。</p>
+                <p><strong>【资金流出源头】：</strong> <strong>新能源（-15.2亿）</strong>、<strong>电子元件（-11.8亿）</strong> 及 <strong>计算机应用（-9.5亿）</strong>。前期获利筹码因估值承压，触发程序化止损与止盈平仓卖单。</p>
+                <p><strong>【资金中转分流】：</strong> 调仓资金中，约 <strong>60%</strong> 经机构与北向专用通道直接进行跨板块换仓，约 <strong>40%</strong> 转化为场内逆回购与微型观望挂单。</p>
+                <p><strong>【资金流入去向】：</strong> 资金精准回流至高贝塔及对冲防御板块——<strong>券商（+12.5亿）</strong>、<strong>半导体（+9.8亿）</strong>、<strong>银行（+8.3亿）</strong>，形成了极其清晰的“卖出高位科技/新能源 → 买入高股息/对冲大金融”的对冲闭环。</p>
             </div>
         </section>
 
-        <!-- 3. 五大量化图表与独家硬核解析 -->
+        <!-- 3. 五大 ECharts 量化图表及独立解析 -->
         <section class="section-card">
-            <div class="section-title">
-                <span>三、 五大量化图表与独家针对性硬核解析</span>
-            </div>
+            <div class="section-title">三、 五大 ECharts 量化图表及独立硬核解析</div>
 
-            <!-- 图表 1 -->
             <h3 style="font-size: 1rem; margin-bottom: 8px;">1. 重点行业板块涨跌幅分布图 (sectorChangeChart)</h3>
             <div id="sectorChangeChart" class="chart-box"></div>
             <div class="analysis-box">
                 <strong>【硬核解读】：</strong> 涨幅分化剧烈，券商（+3.2%）与半导体（+2.5%）双龙头冲锋，而房地产（-1.2%）领跌。中信证券（600030）与中芯国际（688981）在关键均线位放量，是典型的机构对冲盘与突破算法跟风盘共振。
             </div>
 
-            <!-- 图表 2 -->
             <h3 style="font-size: 1rem; margin-bottom: 8px;">2. 行业板块换手率与热度拥挤度图 (turnoverChart)</h3>
             <div id="turnoverChart" class="chart-box"></div>
             <div class="analysis-box">
                 <strong>【硬核解读】：</strong> 券商（18.5%）与半导体（15.2%）换手率进入超买极值区，高频倒手剧烈；相反，招商银行（2.1%）换手极低，属于典型的机构长线底仓，不参与散户换手博弈。
             </div>
 
-            <!-- 图表 3 -->
             <h3 style="font-size: 1rem; margin-bottom: 8px;">3. 市场涨跌家数比与结构性体感图 (advanceDeclineChart)</h3>
             <div id="advanceDeclineChart" class="chart-box"></div>
             <div class="analysis-box">
                 <strong>【硬核解读】：</strong> 呈现典型的“伪多头”特征。拉升券商、银行维系指数，但新能源与地产板块多头匮乏（宁德时代、万科A承压），全市场中位数涨幅接近 0，属于拉权重掩护调仓。
             </div>
 
-            <!-- 图表 4 -->
             <h3 style="font-size: 1rem; margin-bottom: 8px;">4. 主力资金来源与去向分析图 (capitalFlowChart)</h3>
             <div id="capitalFlowChart" class="chart-box"></div>
             <div class="analysis-box">
                 <strong>【硬核解读】：</strong> 展示了新能源（-15.2亿）与电子（-11.8亿）充当大金融“血包”的资金闭环。贵州茅台（600519）在科技股下杀时显现强烈的避险跷跷板效应。
             </div>
 
-            <!-- 图表 5 -->
             <h3 style="font-size: 1rem; margin-bottom: 8px;">5. 行业主力资金净流入/流出排行榜 (mainInflowChart)</h3>
             <div id="mainInflowChart" class="chart-box"></div>
             <div class="analysis-box">
@@ -332,9 +324,7 @@
 
         <!-- 4. 量化高频与算法操作逻辑剖析 -->
         <section class="section-card">
-            <div class="section-title">
-                <span>四、 量化高频与算法交易（Algorithmic Execution Patterns）剖析</span>
-            </div>
+            <div class="section-title">四、 量化高频与算法交易（Algorithmic Execution Patterns）剖析</div>
             <div class="analysis-box">
                 <ul style="padding-left: 20px;">
                     <li style="margin-bottom: 8px;"><strong>TWAP/VWAP 拆单吸筹（券商/金融）：</strong> 10:30 与 14:00 出现微型挂单（20-50手）拆单买入痕迹，避开大单预警，实现对冲池隐蔽吸筹。</li>
@@ -350,7 +340,6 @@
     </div>
 
     <script>
-        // 防抖函数
         function debounce(func, wait) {
             let timeout;
             return function(...args) {
@@ -365,7 +354,6 @@
         const ups = [42, 45, 38, 22, 31, 25, 18, 28, 35, 20];
         const downs = [8, 12, 15, 28, 19, 15, 32, 12, 15, 30];
 
-        // 1. 板块涨跌幅图
         const sectorChangeChart = echarts.init(document.getElementById('sectorChangeChart'));
         sectorChangeChart.setOption({
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
@@ -373,27 +361,20 @@
             yAxis: { type: 'value', name: '涨跌幅 (%)' },
             series: [{
                 data: changes.map(v => ({ value: v, itemStyle: { color: v >= 0 ? '#B91C1C' : '#15803D' } })),
-                type: 'bar',
-                barWidth: '50%'
+                type: 'bar', barWidth: '50%'
             }]
         });
 
-        // 2. 换手率分布图
         const turnoverChart = echarts.init(document.getElementById('turnoverChart'));
         turnoverChart.setOption({
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
             xAxis: { type: 'category', data: sectors, axisLabel: { rotate: 30, fontSize: 10 } },
             yAxis: { type: 'value', name: '换手率 (%)' },
             series: [{
-                data: turnovers,
-                type: 'line',
-                smooth: true,
-                itemStyle: { color: '#111110' },
-                lineStyle: { width: 3 }
+                data: turnovers, type: 'line', smooth: true, itemStyle: { color: '#111110' }, lineStyle: { width: 3 }
             }]
         });
 
-        // 3. 涨跌家数比图
         const advanceDeclineChart = echarts.init(document.getElementById('advanceDeclineChart'));
         advanceDeclineChart.setOption({
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
@@ -406,7 +387,6 @@
             ]
         });
 
-        // 4. 资金来源与去向图
         const capitalFlowChart = echarts.init(document.getElementById('capitalFlowChart'));
         capitalFlowChart.setOption({
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
@@ -421,12 +401,10 @@
                     { value: 9.8, itemStyle: { color: '#B91C1C' } },
                     { value: 8.3, itemStyle: { color: '#B91C1C' } }
                 ],
-                type: 'bar',
-                barWidth: '45%'
+                type: 'bar', barWidth: '45%'
             }]
         });
 
-        // 5. 主力资金排行榜
         const mainInflowChart = echarts.init(document.getElementById('mainInflowChart'));
         mainInflowChart.setOption({
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
@@ -434,8 +412,7 @@
             yAxis: { type: 'value', name: '主力净额 (亿元)' },
             series: [{
                 data: [12.5, 9.8, 8.3, 5.1, 4.2, -15.2, -11.8, -9.5].map(v => ({ value: v, itemStyle: { color: v >= 0 ? '#B91C1C' : '#15803D' } })),
-                type: 'bar',
-                barWidth: '50%'
+                type: 'bar', barWidth: '50%'
             }]
         });
 
