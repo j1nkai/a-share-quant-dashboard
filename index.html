@@ -416,11 +416,85 @@
                         <tbody>
 
                             <tr>
-                                <td colspan="5" style="text-align:center; color: var(--ink-light); padding: 24px; font-style: italic;">
-                                    Post-market data sync in progress. Analytical framework active for Day {days_tracked}.
-                                </td>
+                                <td><strong>半导体</strong></td>
+                                <td class="mono text-red">+2.50%</td>
+                                <td class="mono">15.20%</td>
+                                <td>中芯国际 (5.80%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
                             </tr>
-        
+            
+                            <tr>
+                                <td><strong>人工智能</strong></td>
+                                <td class="mono text-red">+1.80%</td>
+                                <td class="mono">12.80%</td>
+                                <td>科大讯飞 (4.20%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>新能源</strong></td>
+                                <td class="mono text-green">-0.50%</td>
+                                <td class="mono">8.50%</td>
+                                <td>宁德时代 (-1.20%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>医药生物</strong></td>
+                                <td class="mono text-red">+0.80%</td>
+                                <td class="mono">6.30%</td>
+                                <td>恒瑞医药 (2.10%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>券商</strong></td>
+                                <td class="mono text-red">+3.20%</td>
+                                <td class="mono">18.50%</td>
+                                <td>中信证券 (6.50%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>银行</strong></td>
+                                <td class="mono text-red">+0.30%</td>
+                                <td class="mono">2.10%</td>
+                                <td>招商银行 (1.80%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>房地产</strong></td>
+                                <td class="mono text-green">-1.20%</td>
+                                <td class="mono">5.80%</td>
+                                <td>万科A (-2.50%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>白酒</strong></td>
+                                <td class="mono text-red">+1.50%</td>
+                                <td class="mono">7.20%</td>
+                                <td>贵州茅台 (3.20%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>军工</strong></td>
+                                <td class="mono text-red">+0.90%</td>
+                                <td class="mono">9.80%</td>
+                                <td>中航沈飞 (2.80%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
+                            <tr>
+                                <td><strong>汽车</strong></td>
+                                <td class="mono text-green">-0.80%</td>
+                                <td class="mono">6.50%</td>
+                                <td>比亚迪 (-1.50%)</td>
+                                <td><span class="badge-quant">GRID_ALGO</span></td>
+                            </tr>
+            
                         </tbody>
                     </table>
                 </div>
@@ -451,6 +525,18 @@
                 <h3 style="font-family: var(--font-title); font-size: 14px; margin-bottom: 12px; color: var(--ink-black);">Advance/Decline Analysis</h3>
                 <div id="advanceDeclineChart" style="width: 100%; height: 400px; border: 1px solid var(--rule-light); background: #FDFCFA;"></div>
             </div>
+            
+            <!-- 资金流向分析 -->
+            <div class="chart-container" style="margin-bottom: 32px;">
+                <h3 style="font-family: var(--font-title); font-size: 14px; margin-bottom: 12px; color: var(--ink-black);">Capital Flow Analysis (资金来源/去向)</h3>
+                <div id="capitalFlowChart" style="width: 100%; height: 500px; border: 1px solid var(--rule-light); background: #FDFCFA;"></div>
+            </div>
+            
+            <!-- 主力资金净流入排行 -->
+            <div class="chart-container" style="margin-bottom: 32px;">
+                <h3 style="font-family: var(--font-title); font-size: 14px; margin-bottom: 12px; color: var(--ink-black);">Main Capital Net Inflow Ranking</h3>
+                <div id="mainInflowChart" style="width: 100%; height: 400px; border: 1px solid var(--rule-light); background: #FDFCFA;"></div>
+            </div>
         </div>
 
         <footer>
@@ -463,33 +549,15 @@
     <!-- ECharts 初始化脚本 -->
     <script>
         // 准备数据
-        const sectorsData = [];
-        
-        // 检查是否有数据
-        const hasData = sectorsData && sectorsData.length > 0;
-        
-        // 空数据提示配置
-        const emptyGraphic = {
-            type: 'text',
-            left: 'center',
-            top: 'middle',
-            style: {
-                text: 'Data sync in progress...\nPlease check back after market close.',
-                fontSize: 14,
-                fontFamily: 'JetBrains Mono',
-                fill: '#99948D',
-                textAlign: 'center'
-            }
-        };
+        const sectorsData = [{"name": "半导体", "change_pct": 2.5, "turnover_rate": 15.2, "up_count": 45, "down_count": 12, "leading_stock": "中芯国际", "leading_change": 5.8}, {"name": "人工智能", "change_pct": 1.8, "turnover_rate": 12.8, "up_count": 38, "down_count": 15, "leading_stock": "科大讯飞", "leading_change": 4.2}, {"name": "新能源", "change_pct": -0.5, "turnover_rate": 8.5, "up_count": 22, "down_count": 28, "leading_stock": "宁德时代", "leading_change": -1.2}, {"name": "医药生物", "change_pct": 0.8, "turnover_rate": 6.3, "up_count": 31, "down_count": 19, "leading_stock": "恒瑞医药", "leading_change": 2.1}, {"name": "券商", "change_pct": 3.2, "turnover_rate": 18.5, "up_count": 42, "down_count": 8, "leading_stock": "中信证券", "leading_change": 6.5}, {"name": "银行", "change_pct": 0.3, "turnover_rate": 2.1, "up_count": 25, "down_count": 15, "leading_stock": "招商银行", "leading_change": 1.8}, {"name": "房地产", "change_pct": -1.2, "turnover_rate": 5.8, "up_count": 18, "down_count": 32, "leading_stock": "万科A", "leading_change": -2.5}, {"name": "白酒", "change_pct": 1.5, "turnover_rate": 7.2, "up_count": 28, "down_count": 12, "leading_stock": "贵州茅台", "leading_change": 3.2}, {"name": "军工", "change_pct": 0.9, "turnover_rate": 9.8, "up_count": 35, "down_count": 15, "leading_stock": "中航沈飞", "leading_change": 2.8}, {"name": "汽车", "change_pct": -0.8, "turnover_rate": 6.5, "up_count": 20, "down_count": 30, "leading_stock": "比亚迪", "leading_change": -1.5}];
         
         // 1. 板块涨跌幅柱状图
         const changeChart = echarts.init(document.getElementById('sectorChangeChart'));
         const changeOption = {
-            graphic: hasData ? [] : [emptyGraphic],
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
             xAxis: {
                 type: 'category',
-                data: hasData ? sectorsData.map(s => s.name) : [],
+                data: sectorsData.map(s => s.name),
                 axisLabel: { rotate: 45, fontSize: 10, fontFamily: 'JetBrains Mono' }
             },
             yAxis: {
@@ -499,10 +567,10 @@
                 axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 10 }
             },
             series: [{
-                data: hasData ? sectorsData.map(s => ({
+                data: sectorsData.map(s => ({
                     value: s.change_pct,
                     itemStyle: { color: s.change_pct >= 0 ? '#B91C1C' : '#15803D' }
-                })) : [],
+                })),
                 type: 'bar',
                 barWidth: '60%',
                 label: {
@@ -528,11 +596,10 @@
         // 2. 板块换手率柱状图
         const turnoverChart = echarts.init(document.getElementById('turnoverChart'));
         const turnoverOption = {
-            graphic: hasData ? [] : [emptyGraphic],
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
             xAxis: {
                 type: 'category',
-                data: hasData ? sectorsData.map(s => s.name) : [],
+                data: sectorsData.map(s => s.name),
                 axisLabel: { rotate: 45, fontSize: 10, fontFamily: 'JetBrains Mono' }
             },
             yAxis: {
@@ -542,7 +609,7 @@
                 axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 10 }
             },
             series: [{
-                data: hasData ? sectorsData.map(s => s.turnover_rate) : [],
+                data: sectorsData.map(s => s.turnover_rate),
                 type: 'bar',
                 barWidth: '60%',
                 itemStyle: {
@@ -573,11 +640,10 @@
         // 3. 涨跌家数对比图
         const advanceDeclineChart = echarts.init(document.getElementById('advanceDeclineChart'));
         const advanceDeclineOption = {
-            graphic: hasData ? [] : [emptyGraphic],
             grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
             xAxis: {
                 type: 'category',
-                data: hasData ? sectorsData.map(s => s.name) : [],
+                data: sectorsData.map(s => s.name),
                 axisLabel: { rotate: 45, fontSize: 10, fontFamily: 'JetBrains Mono' }
             },
             yAxis: {
@@ -591,7 +657,7 @@
                     name: 'Advance',
                     type: 'bar',
                     stack: 'total',
-                    data: hasData ? sectorsData.map(s => s.up_count) : [],
+                    data: sectorsData.map(s => s.up_count),
                     itemStyle: { color: '#B91C1C' },
                     label: { show: true, position: 'inside', fontFamily: 'JetBrains Mono', fontSize: 9 }
                 },
@@ -599,7 +665,7 @@
                     name: 'Decline',
                     type: 'bar',
                     stack: 'total',
-                    data: hasData ? sectorsData.map(s => s.down_count) : [],
+                    data: sectorsData.map(s => s.down_count),
                     itemStyle: { color: '#15803D' },
                     label: { show: true, position: 'inside', fontFamily: 'JetBrains Mono', fontSize: 9 }
                 }
@@ -616,11 +682,151 @@
         };
         advanceDeclineChart.setOption(advanceDeclineOption);
         
+        // 4. 资金流向分析图（桑基图风格）
+        const capitalFlowChart = echarts.init(document.getElementById('capitalFlowChart'));
+        const capitalFlowsData = [];
+        
+        // 分离资金流入和流出
+        const inflows = capitalFlowsData.filter(f => f.main_net_inflow > 0).slice(0, 10);
+        const outflows = capitalFlowsData.filter(f => f.main_net_inflow < 0).slice(0, 10);
+        
+        const capitalFlowOption = {
+            title: {
+                text: '资金来源与去向分析',
+                left: 'center',
+                textStyle: { fontFamily: 'JetBrains Mono', fontSize: 12 }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' },
+                formatter: function(params) {
+                    const data = params[0];
+                    return `<strong>${data.name}</strong><br/>主力净流入: ${(data.value / 100000000).toFixed(2)}亿`;
+                }
+            },
+            grid: [
+                { left: '5%', right: '55%', top: '15%', bottom: '10%' },
+                { left: '55%', right: '5%', top: '15%', bottom: '10%' }
+            ],
+            xAxis: [
+                {
+                    type: 'value',
+                    name: '资金流入 (亿)',
+                    nameTextStyle: { fontFamily: 'JetBrains Mono', fontSize: 10 },
+                    axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 9 },
+                    gridIndex: 0
+                },
+                {
+                    type: 'value',
+                    name: '资金流出 (亿)',
+                    nameTextStyle: { fontFamily: 'JetBrains Mono', fontSize: 10 },
+                    axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 9 },
+                    gridIndex: 1,
+                    inverse: true
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'category',
+                    data: inflows.map(f => f.name),
+                    axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 9 },
+                    gridIndex: 0
+                },
+                {
+                    type: 'category',
+                    data: outflows.map(f => f.name),
+                    axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 9 },
+                    gridIndex: 1
+                }
+            ],
+            series: [
+                {
+                    name: '资金流入',
+                    type: 'bar',
+                    data: inflows.map(f => ({
+                        value: (f.main_net_inflow / 100000000).toFixed(2),
+                        itemStyle: { color: '#B91C1C' }
+                    })),
+                    label: {
+                        show: true,
+                        position: 'right',
+                        formatter: '{c}亿',
+                        fontFamily: 'JetBrains Mono',
+                        fontSize: 9
+                    }
+                },
+                {
+                    name: '资金流出',
+                    type: 'bar',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    data: outflows.map(f => ({
+                        value: Math.abs(f.main_net_inflow / 100000000).toFixed(2),
+                        itemStyle: { color: '#15803D' }
+                    })),
+                    label: {
+                        show: true,
+                        position: 'left',
+                        formatter: '{c}亿',
+                        fontFamily: 'JetBrains Mono',
+                        fontSize: 9
+                    }
+                }
+            ]
+        };
+        capitalFlowChart.setOption(capitalFlowOption);
+        
+        // 5. 主力资金净流入排行
+        const mainInflowChart = echarts.init(document.getElementById('mainInflowChart'));
+        const sortedFlows = [...capitalFlowsData].sort((a, b) => Math.abs(b.main_net_inflow) - Math.abs(a.main_net_inflow)).slice(0, 15);
+        
+        const mainInflowOption = {
+            grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: sortedFlows.map(f => f.name),
+                axisLabel: { rotate: 45, fontSize: 9, fontFamily: 'JetBrains Mono' }
+            },
+            yAxis: {
+                type: 'value',
+                name: '净流入 (亿)',
+                nameTextStyle: { fontFamily: 'JetBrains Mono', fontSize: 10 },
+                axisLabel: { fontFamily: 'JetBrains Mono', fontSize: 9 }
+            },
+            series: [{
+                data: sortedFlows.map(f => ({
+                    value: (f.main_net_inflow / 100000000).toFixed(2),
+                    itemStyle: { color: f.main_net_inflow >= 0 ? '#B91C1C' : '#15803D' }
+                })),
+                type: 'bar',
+                barWidth: '60%',
+                label: {
+                    show: true,
+                    position: 'top',
+                    formatter: '{c}亿',
+                    fontFamily: 'JetBrains Mono',
+                    fontSize: 8
+                }
+            }],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' },
+                formatter: function(params) {
+                    const data = params[0];
+                    const flow = sortedFlows[data.dataIndex];
+                    return `<strong>${flow.name}</strong><br/>主力净流入: ${(flow.main_net_inflow / 100000000).toFixed(2)}亿<br/>涨跌幅: ${flow.change_pct.toFixed(2)}%`;
+                }
+            }
+        };
+        mainInflowChart.setOption(mainInflowOption);
+        
         // 响应式调整
         window.addEventListener('resize', function() {
             changeChart.resize();
             turnoverChart.resize();
             advanceDeclineChart.resize();
+            capitalFlowChart.resize();
+            mainInflowChart.resize();
         });
     </script>
 </body>
