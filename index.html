@@ -4274,7 +4274,63 @@
     <script>
         const sectors = [{"name": "电子信息", "code": "new_dzxx", "change_pct": 5.39, "turnover_rate": 9.27, "up_count": 40, "down_count": 0, "leading_stock": "网宿科技", "leading_change": 20.01}, {"name": "电子器件", "code": "new_dzqj", "change_pct": 3.95, "turnover_rate": 5.55, "up_count": 40, "down_count": 0, "leading_stock": "麦捷科技", "leading_change": 11.09}, {"name": "机械行业", "code": "new_jxhy", "change_pct": 3.41, "turnover_rate": 4.39, "up_count": 40, "down_count": 0, "leading_stock": "康盛股份", "leading_change": 10.0}, {"name": "化工行业", "code": "new_hghy", "change_pct": 2.8, "turnover_rate": 4.14, "up_count": 40, "down_count": 0, "leading_stock": "瑞丰高材", "leading_change": 16.09}, {"name": "有色金属", "code": "new_ysjs", "change_pct": 2.13, "turnover_rate": 3.47, "up_count": 40, "down_count": 0, "leading_stock": "中国稀土", "leading_change": 10.0}, {"name": "生物制药", "code": "new_swzz", "change_pct": 2.04, "turnover_rate": 5.59, "up_count": 40, "down_count": 0, "leading_stock": "国华退", "leading_change": 10.87}, {"name": "建筑建材", "code": "new_jzjc", "change_pct": 1.27, "turnover_rate": 1.91, "up_count": 22, "down_count": 2, "leading_stock": "成都路桥", "leading_change": 10.1}, {"name": "汽车制造", "code": "new_qczz", "change_pct": 1.22, "turnover_rate": 2.21, "up_count": 31, "down_count": 0, "leading_stock": "成飞集成", "leading_change": 6.73}, {"name": "医疗器械", "code": "new_ylqx", "change_pct": 1.1, "turnover_rate": 3.65, "up_count": 15, "down_count": 12, "leading_stock": "博济医药", "leading_change": 20.0}, {"name": "化纤行业", "code": "new_hqhy", "change_pct": 1.08, "turnover_rate": 2.06, "up_count": 11, "down_count": 10, "leading_stock": "华西股份", "leading_change": 9.94}, {"name": "房地产", "code": "new_fdc", "change_pct": 0.99, "turnover_rate": 2.09, "up_count": 26, "down_count": 0, "leading_stock": "盈新发展", "leading_change": 10.18}, {"name": "玻璃行业", "code": "new_blhy", "change_pct": 0.98, "turnover_rate": 2.65, "up_count": 13, "down_count": 6, "leading_stock": "中国巨石", "leading_change": 5.94}];
         const flows = [{"name": "电子信息", "code": "new_dzxx", "change_pct": 5.39, "main_net_inflow": 845768008.5294678, "main_net_inflow_pct": 8.46}, {"name": "电子器件", "code": "new_dzqj", "change_pct": 3.95, "main_net_inflow": 181860704.95471293, "main_net_inflow_pct": 1.82}, {"name": "机械行业", "code": "new_jxhy", "change_pct": 3.41, "main_net_inflow": 67923930.35951966, "main_net_inflow_pct": 0.68}, {"name": "化工行业", "code": "new_hghy", "change_pct": 2.8, "main_net_inflow": 55357532.46053965, "main_net_inflow_pct": 0.55}, {"name": "有色金属", "code": "new_ysjs", "change_pct": 2.13, "main_net_inflow": 171609742.45894, "main_net_inflow_pct": 1.72}, {"name": "生物制药", "code": "new_swzz", "change_pct": 2.04, "main_net_inflow": 76775565.08175926, "main_net_inflow_pct": 0.77}, {"name": "建筑建材", "code": "new_jzjc", "change_pct": 1.27, "main_net_inflow": 55320738.42060886, "main_net_inflow_pct": 0.55}, {"name": "汽车制造", "code": "new_qczz", "change_pct": 1.22, "main_net_inflow": 52306715.24763464, "main_net_inflow_pct": 0.52}, {"name": "医疗器械", "code": "new_ylqx", "change_pct": 1.1, "main_net_inflow": 50635034.651185945, "main_net_inflow_pct": 0.51}, {"name": "化纤行业", "code": "new_hqhy", "change_pct": 1.08, "main_net_inflow": 58362641.558977105, "main_net_inflow_pct": 0.58}, {"name": "房地产", "code": "new_fdc", "change_pct": 0.99, "main_net_inflow": 35092082.16958746, "main_net_inflow_pct": 0.35}, {"name": "玻璃行业", "code": "new_blhy", "change_pct": 0.98, "main_net_inflow": 121541021.98740052, "main_net_inflow_pct": 1.22}];
+        
+        // 动态生成桑基图流向数据
         const flowLinks = [];
+        const totalInflow = flows.reduce((sum, f) => sum + Math.max(0, f.main_net_inflow), 0);
+        
+        // 按资金规模分类来源
+        const largeFlows = flows.filter(f => f.main_net_inflow > 100000000); // >1亿
+        const mediumFlows = flows.filter(f => f.main_net_inflow > 50000000 && f.main_net_inflow <= 100000000); // 5000万-1亿
+        const smallFlows = flows.filter(f => f.main_net_inflow > 0 && f.main_net_inflow <= 50000000); // <5000万
+        
+        // 构建流向链接
+        largeFlows.forEach(f => {
+            flowLinks.push({
+                source: '主力资金(大额)',
+                target: f.name,
+                value: (f.main_net_inflow / 100000000).toFixed(2) // 转换为亿
+            });
+        });
+        
+        mediumFlows.forEach(f => {
+            flowLinks.push({
+                source: '主力资金(中额)',
+                target: f.name,
+                value: (f.main_net_inflow / 100000000).toFixed(2)
+            });
+        });
+        
+        smallFlows.forEach(f => {
+            flowLinks.push({
+                source: '主力资金(小额)',
+                target: f.name,
+                value: (f.main_net_inflow / 100000000).toFixed(2)
+            });
+        });
+        
+        // 添加汇总节点
+        if (largeFlows.length > 0) {
+            flowLinks.push({
+                source: '机构资金池',
+                target: '主力资金(大额)',
+                value: (largeFlows.reduce((s, f) => s + f.main_net_inflow, 0) / 100000000).toFixed(2)
+            });
+        }
+        if (mediumFlows.length > 0) {
+            flowLinks.push({
+                source: '机构资金池',
+                target: '主力资金(中额)',
+                value: (mediumFlows.reduce((s, f) => s + f.main_net_inflow, 0) / 100000000).toFixed(2)
+            });
+        }
+        if (smallFlows.length > 0) {
+            flowLinks.push({
+                source: '机构资金池',
+                target: '主力资金(小额)',
+                value: (smallFlows.reduce((s, f) => s + f.main_net_inflow, 0) / 100000000).toFixed(2)
+            });
+        }
 
         // 1. 涨跌幅图
         const cChange = echarts.init(document.getElementById('chartChange'));
@@ -4313,17 +4369,42 @@
             const cSankey = echarts.init(document.getElementById('chartSankey'));
             const nodeNames = Array.from(new Set(flowLinks.flatMap(l => [l.source, l.target])));
             cSankey.setOption({
-                tooltip: { trigger: 'item', triggerOn: 'mousemove' },
+                tooltip: { 
+                    trigger: 'item', 
+                    triggerOn: 'mousemove',
+                    formatter: function(params) {
+                        if (params.dataType === 'edge') {
+                            return params.data.source + ' → ' + params.data.target + '<br/>资金: ' + params.data.value + ' 亿元';
+                        }
+                        return params.name;
+                    }
+                },
                 series: [{
                     type: 'sankey',
-                    data: nodeNames.map(n => ({ name: n })),
+                    data: nodeNames.map(n => ({ 
+                        name: n,
+                        itemStyle: {
+                            color: n.includes('机构') ? '#B91C1C' : 
+                                   n.includes('大额') ? '#DC2626' : 
+                                   n.includes('中额') ? '#EA580C' : 
+                                   n.includes('小额') ? '#CA8A04' : '#2B2A28'
+                        }
+                    })),
                     links: flowLinks,
                     lineStyle: { color: 'gradient', curveness: 0.5, opacity: 0.4 },
                     itemStyle: { borderColor: '#111110', borderWidth: 1 },
-                    label: { fontSize: 11, fontFamily: 'JetBrains Mono' }
+                    label: { fontSize: 11, fontFamily: 'JetBrains Mono' },
+                    emphasis: { focus: 'adjacency' },
+                    levels: [
+                        { depth: 0, itemStyle: { color: '#B91C1C' }, lineStyle: { color: 'source', opacity: 0.6 } },
+                        { depth: 1, itemStyle: { color: '#EA580C' }, lineStyle: { color: 'source', opacity: 0.5 } },
+                        { depth: 2, itemStyle: { color: '#2B2A28' }, lineStyle: { color: 'source', opacity: 0.4 } }
+                    ]
                 }]
             });
             window.addEventListener('resize', () => cSankey.resize());
+        } else {
+            document.getElementById('chartSankey').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">暂无资金流向数据</div>';
         }
 
         // 4. 主力净流入图
